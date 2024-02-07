@@ -31,6 +31,7 @@
 var app = new Vue({
     el: '#app',
     data: {
+        imgClass: 'img-fluid',
         maximum: 50,
         products: null,
         cart: [],
