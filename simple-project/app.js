@@ -33,7 +33,8 @@ var app = new Vue({
     data: {
         maximum: 50,
         products: null,
-        cart: []
+        cart: [],
+        name: 'Hello World'
     },
     mounted: function() {
         fetch('https://hplussport.com/api/products/order/price')

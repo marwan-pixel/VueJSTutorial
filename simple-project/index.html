@@ -17,10 +17,27 @@
                 <span class="badge rounded-pill text-bg-success">{{ cart.length }}</span>
             </div>
         </nav>
-        <div class="form-inline mr-auto">
+        <div class="form-inline mr-auto mb-3">
             <label for="" class="font-weight-bold mr-2">Max</label>
             <input type="number" class="form-control w-25" v-model="maximum">
         </div>
+        <input type="text" v-model="name" class="form-control" id="">
+
+        <p>
+            <strong>Bound:</strong><br>
+            <span>{{ name }}</span>
+        </p>
+
+        <p>
+            <strong>Parsed:</strong><br>
+            <span v-html="name"></span>
+        </p>
+
+        <p>
+            <strong>Unchangeable:</strong><br>
+            <span v-once>{{name}}</span>
+        </p>
+
         <input type="range" class="custom-range" min="0" max="200" v-model="maximum">
         <div class="row d-flex mb-3 align-items-center" v-for="item in products">
             <div v-if="item.price >= Number(maximum)">
