@@ -14,7 +14,7 @@
         <nav class="navbar navbar-light bg-light">
             <div class="navbar-text ml-auto">
                 <b>Cart:</b>
-                <span class="badge badge-pill badge-success"></span>
+                <span class="badge rounded-pill text-bg-success">{{ cart.length }}</span>
             </div>
         </nav>
         <div class="form-inline mr-auto">
@@ -22,10 +22,10 @@
             <input type="number" class="form-control w-25" v-model="maximum">
         </div>
         <input type="range" class="custom-range" min="0" max="200" v-model="maximum">
-        <div class="row d-flex mb-3 align-items-center" v-for="item in products" >
+        <div class="row d-flex mb-3 align-items-center" v-for="item in products">
             <div v-if="item.price >= Number(maximum)">
                 <div class="col-1 m-auto">
-                    <button class="btn btn-info text-white">+</button>
+                    <button class="btn btn-info text-white" v-on:click="addItem(item)">+</button>
                 </div>
                 <div class="col-sm-4">
                     <img class="img-fluid" :src="item.image" :alt="item.name">
