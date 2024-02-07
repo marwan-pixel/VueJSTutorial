@@ -35,7 +35,8 @@ var app = new Vue({
         maximum: 50,
         products: null,
         cart: [],
-        name: 'Hello World'
+        name: 'Hello World',
+        slugText: 'The Quick #(*!&@ Brown 29'
     },
     mounted: function() {
         fetch('https://hplussport.com/api/products/order/price')
@@ -44,7 +45,32 @@ var app = new Vue({
             this.products = data;
         })
     },
+    computed: {
+        now: function() {
+            var date = new Date();
+            return (
+                String(date.getHours()) +
+                String(date.getMinutes()) +
+                String(date.getSeconds())
+            );
+        },
+        slugetize: function() {
+            return this.slugText
+                    .toLowerCase()
+                    .replace(/[^\w]+/g, '')
+                    .replace(/ +/g, '-') + '-' + this.now();
+        }
+    },
     methods: {
+        
+        now: function() {
+            var date = new Date();
+            return (
+                String(date.getHours()) +
+                String(date.getMinutes()) +
+                String(date.getSeconds())
+            );
+        },
         addItem: function (product) {
             this.cart.push(product);
         }

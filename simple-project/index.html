@@ -21,8 +21,10 @@
             <label for="" class="font-weight-bold mr-2">Max</label>
             <input type="number" class="form-control w-25" v-model="maximum">
         </div>
-        <input type="text" v-model="name" class="form-control" id="">
+        <input type="text" v-model="name" class="form-control mb-3" id="">
+        <input type="text" v-model="slugText" class="form-control" id="">
 
+        <div class="font-weight text-danger">{{ slugetize }}</div>
         <p>
             <strong>Bound:</strong><br>
             <span>{{ name }}</span>
