@@ -36,7 +36,9 @@ var app = new Vue({
         products: null,
         cart: [],
         style: {
-            label: ['font-weight-bold', 'mr-2']
+            label: ['font-weight-bold', 'mr-2'],
+            inputWidth: 60,
+            sliderStatus: true
         },
         name: 'Hello World',
         slugText: 'The Quick #(*!&@ Brown 29'
@@ -62,6 +64,9 @@ var app = new Vue({
                     .toLowerCase()
                     .replace(/[^\w]+/g, '')
                     .replace(/ +/g, '-') + '-' + this.now();
+        },
+        sliderState: function() {
+            return this.style.sliderStatus ? 'd-flex' : 'd-none';
         }
     },
     methods: {
