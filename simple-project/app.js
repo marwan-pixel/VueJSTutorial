@@ -38,7 +38,7 @@ var app = new Vue({
         style: {
             label: ['font-weight-bold', 'mr-2'],
             inputWidth: 60,
-            sliderStatus: true
+            sliderStatus: false
         },
         name: 'Hello World',
         slugText: 'The Quick #(*!&@ Brown 29'
