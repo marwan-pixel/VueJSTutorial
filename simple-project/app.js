@@ -35,6 +35,9 @@ var app = new Vue({
         maximum: 50,
         products: null,
         cart: [],
+        style: {
+            label: ['font-weight-bold', 'mr-2']
+        },
         name: 'Hello World',
         slugText: 'The Quick #(*!&@ Brown 29'
     },
