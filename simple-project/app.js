@@ -27,6 +27,9 @@
 //         },
 //     ]
 // };
+Vue.filters('currencyFormat', function(){
+    
+});
 
 var app = new Vue({
     el: '#app',
@@ -67,6 +70,11 @@ var app = new Vue({
         },
         sliderState: function() {
             return this.style.sliderStatus ? 'd-flex' : 'd-none';
+        }
+    },
+    filters: {
+        currencyFormat: function(value) {
+            return `$${Number.parseFloat(value).toFixed(2)}`;
         }
     },
     methods: {
