@@ -20,20 +20,23 @@
                 <button class="btn btn-sm btn-outline-success" @click="style.sliderStatus= !style.sliderStatus">
                     <i class="fas fa-dollar-sign"></i>
                 </button>
-                <div class="ms-2 dropdown">
+                <div class="ms-2 dropdown" v-if="cart.length > 0">
                     <button class="btn btn-success btn-sm dropdown-toggle" id="dropdownCart" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        <b>Cart:</b>
-                        <span class="badge rounded-pill text-bg-success">{{ cart.length }}</span>
+                        <span class="badge rounded-pill text-bg-success">{{ cartQty }}</span>
+                        <i class="fas fa-cart-shopping"></i>
+                        {{ cartTotal | currencyFormat}}
+
                     </button>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownCart">
                         <div v-for="(item, index) in cart" :key="index">
-                            <div class="dropdown-item-text text-nowrap text-right">
+                            <div class="dropdown-item-text text-nowrap text-end">
                                 <span class="badge rounded-pill text-bg-warning align-text-top me-2">
                                     {{ item.qty }}
                                 </span>
-                                {{ item.name }}
-                                <b>{{ item.price | currencyFormat }}</b>
+                                {{ item.product.name }}
+                                <b>{{ item.product.price * item.qty| currencyFormat }}</b>
+                                <a href="#" class="badge text-bg-danger" @click.stop="deleteItem(index)">-</a>
                             </div>
                         </div>
                     </div>
@@ -60,7 +63,7 @@
             <div class="row d-none mb-3 align-items-center" v-for="(item, index) in products" :key="item.id"
                 v-if="item.price <= Number(maximum)" :data-index="index">
                 <div class="col-1 m-auto">
-                    <button class="btn btn-info text-white" v-on:click="addItem(item)">+</button>
+                    <button class="btn btn-info text-white" @click.stop="addItem(item)">+</button>
                 </div>
                 <div class="col-sm-4">
                     <!-- <img :class="`${imgClass}  w-25`" :src="item.image" :alt="item.name"> -->
@@ -73,7 +76,9 @@
                 <div class="col">
                     <h3 class="text-dark fw-bold">{{ item.name }}</h3>
                     <p class="mb-0S">{{ item.description }}</p>
-                    <div class="h5 float-right">{{ item.price | currencyFormat }}</div>
+                    <div class="h5 float-right">
+                        <price></price>
+                    </div>
                 </div>
             </div>
             <div class="row d-flex mb-3 align-items-center" v-for="item in products">
