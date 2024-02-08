@@ -58,7 +58,7 @@
             </div>
         </transition>
 
-       <product-list :products="products" :maximum="maximum"></product-list>
+       <product-list :products="products" :maximum="maximum" @add="addItem"></product-list>
 
         <!-- <input type="text" v-model="name" class="form-control mb-3" id="">
         <input type="text" v-model="slugText" class="form-control" id="">

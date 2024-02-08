@@ -70,7 +70,7 @@ Vue.component('product-list', {
         <div class="row d-none mb-3 align-items-center" v-for="(item, index) in products" :key="item.id"
             v-if="item.price <= Number(maximum)" :data-index="index">
             <div class="col-1 m-auto">
-                <button class="btn btn-info text-white" @click.stop="addItem(item)">+</button>
+                <button class="btn btn-info text-white" @click.stop="$emit('add', item)">+</button>
             </div>
             <div class="col-sm-4">
                 <img class="img-fluid d-block" :src="item.image" :alt="item.name">
@@ -86,7 +86,7 @@ Vue.component('product-list', {
                 <div class="h5 float-right">
                     <price 
                         :value="Number(item.price)"
-                        :prefix="'$'" 
+                        :prefix="'Rp'" 
                         :precision="2"
                     ></price>
                 </div>
@@ -154,7 +154,7 @@ var app = new Vue({
     },
     filters: {
         currencyFormat: function (value) {
-            return `$${Number.parseFloat(value).toFixed(2)}`;
+            return `Rp${Number.parseFloat(value).toFixed(2)}`;
         }
     },
     methods: {
