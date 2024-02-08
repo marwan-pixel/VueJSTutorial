@@ -20,9 +20,23 @@
                 <button class="btn btn-sm btn-outline-success" @click="style.sliderStatus= !style.sliderStatus">
                     <i class="fas fa-dollar-sign"></i>
                 </button>
-                <div class="ms-2" v-if="cart.length > 0">
-                    <b>Cart:</b>
-                    <span class="badge rounded-pill text-bg-success">{{ cart.length }}</span>
+                <div class="ms-2 dropdown">
+                    <button class="btn btn-success btn-sm dropdown-toggle" id="dropdownCart" data-bs-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <b>Cart:</b>
+                        <span class="badge rounded-pill text-bg-success">{{ cart.length }}</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownCart">
+                        <div v-for="(item, index) in cart" :key="index">
+                            <div class="dropdown-item-text text-nowrap text-right">
+                                <span class="badge rounded-pill text-bg-warning align-text-top me-2">
+                                    {{ item.qty }}
+                                </span>
+                                {{ item.name }}
+                                <b>{{ item.price | currencyFormat }}</b>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>

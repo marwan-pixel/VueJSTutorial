@@ -27,9 +27,6 @@
 //         },
 //     ]
 // };
-Vue.filters('currencyFormat', function(){
-    
-});
 
 var app = new Vue({
     el: '#app',
