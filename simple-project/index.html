@@ -25,8 +25,7 @@
                         aria-haspopup="true" aria-expanded="false">
                         <span class="badge rounded-pill text-bg-success">{{ cartQty }}</span>
                         <i class="fas fa-cart-shopping"></i>
-                        {{ cartTotal | currencyFormat}}
-
+                        <price :value="Number(cartTotal)"></price>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownCart">
                         <div v-for="(item, index) in cart" :key="index">
@@ -59,51 +58,7 @@
             </div>
         </transition>
 
-        <transition-group name="fade" tag="div" @beforeEnter="before" @enter="enter" @leave="leave">
-            <div class="row d-none mb-3 align-items-center" v-for="(item, index) in products" :key="item.id"
-                v-if="item.price <= Number(maximum)" :data-index="index">
-                <div class="col-1 m-auto">
-                    <button class="btn btn-info text-white" @click.stop="addItem(item)">+</button>
-                </div>
-                <div class="col-sm-4">
-                    <!-- <img :class="`${imgClass}  w-25`" :src="item.image" :alt="item.name"> -->
-                    <img v-bind="{
-                        class: imgClass,
-                        src: item.image,
-                        alt: item.name
-                    }">
-                </div>
-                <div class="col">
-                    <h3 class="text-dark fw-bold">{{ item.name }}</h3>
-                    <p class="mb-0S">{{ item.description }}</p>
-                    <div class="h5 float-right">
-                        <price 
-                            :value="item.price"
-                            :prefix="'$'" 
-                            :precision="2"
-                        ></price>
-                    </div>
-                </div>
-            </div>
-            <div class="row d-flex mb-3 align-items-center" v-for="item in products">
-                <div class="col-1 m-auto">
-                    <button class="btn btn-info text-white" v-on:click="addItem(item)">+</button>
-                </div>
-                <div class="col-sm-4">
-                    <!-- <img :class="`${imgClass}  w-25`" :src="item.image" :alt="item.name"> -->
-                    <img v-bind="{
-                        class: imgClass,
-                        src: item.image,
-                        alt: item.name
-                    }">
-                </div>
-                <div class="col">
-                    <h3 class="text-dark fw-bold">{{ item.name }}</h3>
-                    <p class="mb-0S">{{ item.description }}</p>
-                    <div class="h5 float-right">${{ item.price }}</div>
-                </div>
-            </div>
-        </transition-group>
+       <product-list :products="products" :maximum="maximum"></product-list>
 
         <!-- <input type="text" v-model="name" class="form-control mb-3" id="">
         <input type="text" v-model="slugText" class="form-control" id="">
