@@ -4,8 +4,8 @@
         <div v-if="sliderStatus">
             <div class="align-items-center" :class="sliderState">
                 <label for="" class="font-weight-bold me-2">Max</label>
-                <input type="number" class="form-control mx-2" style="width: 60px; text-align: center;" v-model="maxAmount" @change="$emit('update:maximum', maxAmount)">
-                <input type="range" class="custom-range" min="0" max="50" v-model="maxAmount" @input="$emit('update:maximum', maxAmount)">
+                <input type="number" class="form-control mx-2" style="width: 60px; text-align: center;" v-model="maxAmount" @input="updateMaximum">
+                <input type="range" class="custom-range" min="0" max="50" v-model="maxAmount" @input="updateMaximum">
             </div>
         </div>
     </transition>
@@ -18,13 +18,17 @@ export default {
         return {
             maxAmount: 50
         }
-    }
-    ,
+    },
     props: ['sliderStatus', 'maximum'],
     computed: {
         sliderState: function () {
             return this.sliderStatus ? 'd-flex' : 'd-none';
         },
+    },
+    methods: {
+        updateMaximum: function() {
+            this.$emit('update:maximum', this.maxAmount);
+        }
     }
 }
 </script>

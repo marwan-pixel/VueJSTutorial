@@ -1,16 +1,16 @@
 <template>
   <div id="app" class="container mt-5">
-    <h1>IDShop</h1>
-    <navbar-vue :cart="cart" :cartQty="cartQty" :cartTotal="cartTotal" @toggle="toggleSliderStatus" @delete="deleteItem"></navbar-vue>
-    <price-slider :sliderStatus="sliderStatus" v-model:maximum="maximum"></price-slider>
-    <product-list :products="products" :maximum="maximum" @add="addItem"></product-list>
+    <checkout-vue :cart="cart" :cartTotal="cartTotal" @add="addItem" @delete="deleteItem"></checkout-vue>
+    <products-vue :cart="cart" :cartQty="cartQty" :cartTotal="cartTotal" v-model:maximum="maximum"
+    :products="products" :sliderStatus="sliderStatus" @toggle="toggleSliderStatus" @add="addItem"
+    @delete="deleteItem" @update:maximum="updateMaximum"></products-vue>
+
   </div>
 </template>
 
 <script>
-import NavbarVue from './components/NavbarVue.vue';
-import ProductList from './components/ProductList.vue';
-import PriceSlider from './components/PriceSlider.vue';
+import ProductsVue from './components/ProductsVue.vue';
+import CheckoutVue from './components/CheckoutVue.vue';
 export default {
   name: 'App',
   data: function () {
@@ -20,11 +20,9 @@ export default {
       cart: [],
       sliderStatus: false
     }
-  },
-  components: {
-    ProductList,
-    PriceSlider,
-    NavbarVue,
+  }, components: {
+    ProductsVue,
+    CheckoutVue
   },
   methods: {
     toggleSliderStatus: function () {
@@ -52,6 +50,9 @@ export default {
       } else {
         this.cart.splice(key, 1);
       }
+    },
+    updateMaximum: function(newMaximum) {
+      this.maximum = newMaximum;
     }
   },
   mounted: function () {
